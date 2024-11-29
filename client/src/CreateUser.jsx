@@ -11,6 +11,7 @@ function CreateUser() {
 
 
  const handleSubmit = async (e)=>{
+  console.log({ name, email, age }); 
     e.preventDefault();
     
     try{

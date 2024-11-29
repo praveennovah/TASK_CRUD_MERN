@@ -58,15 +58,13 @@ function Users() {
             <td>{user.name}</td>
             <td>{user.email}</td>
             <td>{user.age}</td>
-            <td><Link to={`/update/${user._id}`} className="btn btn-success " >Update</Link>
+            <td><Link to={`/update/${user._id}`} className="btn btn-success me-3" >Update</Link>
             <button onClick={(e)=>handleDelete(user._id)} className="btn btn-danger">Delete</button></td>
           </tr>
-                         })
+          })
         }
-      
       </tbody>
       </table>
-    
   </div>
     
       </>

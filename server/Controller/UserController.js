@@ -1,16 +1,19 @@
 import user from "../Model/UserModel.js";
 
 export const CreateUser = async (req,res) =>{
-
     try {
         const { name, email, age } = req.body;
+        const  existing_user = await user.findOne({email});
+        if(existing_user){
+            res.status(301).json({message : "user already Exist"})
+        }
         const result = await user.create({name,email,age});
-        res.status(201).json(result); // 201 for Created
+        res.status(201).json(result); 
       } catch (err) {
-        res.status(500).json({ message: 'Error creating user', error: err }); // 500 for Internal Server Error
+        res.status(500).json({ message: 'Error creating user', error: err }); 
       }
 
-}
+} 
 
 export const GetoneUSer = async (req,res) =>{
     const {id} = req.params;
@@ -41,7 +44,7 @@ export const UpdateUser = async (req,res)=>{
             age: req.body.age});
         res.status(201).json(putUser); 
       } catch (err) {
-        res.status(500).json({ message: 'Error creating user', error: err });
+        res.status(500).json({ message: 'Error Updating User', error: err });
       }
 }
 
@@ -52,7 +55,7 @@ export const deleteUser = async (req,res) =>{
         const DeleteUser = await user.findByIdAndDelete({_id:id})
         res.status(201).json(DeleteUser); 
       } catch (err) {
-        res.status(500).json({ message: 'Error creating user', error: err }); 
+        res.status(500).json({ message: 'Error deleting user', error: err }); 
       }
 
 }
